@@ -1,118 +1,139 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import { useContext, useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import { createClient } from "contentful";
+import { ColorSchemeContext } from "./templates/Layout";
+import SidebarMobile from "@/components/SidebarMobile";
+import { GetStaticProps } from "next";
+import { getSidebarContent } from "./api/sidebarContent";
 
-const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home( ) {
+  const { colorScheme } = useContext(ColorSchemeContext)
+  const userName = 'Jean Baors'
+  
+  useEffect(() => {
+    getSidebarContent()
+      .then((res) => console.log(res.items))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14">
+        <h2 className="after-effect after:left-52">About Me</h2>
+        <SidebarMobile/>
+        <div className="lg:grid grid-cols-12 md:gap-10 pt-4 md:pt-[30px] items-center hidden">
+          <div className="col-span-12 space-y-2.5">
+            <div className="lg:mr-16">
+              <p className="text-[#44566c] dark:text-color-910 leading-7"> I&apos;m Creative Director
+                and UI/UX Designer from Sydney, Australia, working in web development and
+                print media. I enjoy turning complex problems into simple, beautiful and
+                intuitive designs. </p>
+              <p className="text-[#44566c] leading-7 mt-2.5 dark:text-color-910"> My aim is to
+                bring across your message and identity in the most creative way. I created
+                web design for many famous brand companies. </p>
+            </div>
+            <div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div className="pb-12 px-2 sm:px-5 md:px-10 lg:px-14">
+        <h3 className="text-[35px] dark:text-white font-bold font-robotoSlab pb-5"> What I do! </h3>
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fcf4ff]" : "bg-transparent"}`} >
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> Ui/Ux Design </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
+
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fefaf0]" : "bg-transparent"}`}>
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon1.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> App Development </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
+
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fcf4ff]" : "bg-transparent"}`} >
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon2.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> Photography </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
+
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fff4f4]" : "bg-transparent"}`}>
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon3.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> Photography </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
+
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fff0f8]" : "bg-transparent"}`} >
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon4.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> Managment </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
+
+          <div className={`about-box ${colorScheme == 'dark' ? "bg-[#f3faff]" : "bg-transparent"}`}>
+            <img className="w-10 h-10 object-contain block" src="/assets/images/icons/icon5.svg"
+              alt="icon" />
+            <div className="space-y-2">
+              <h3 className={`text-[22px] font-semibold ${colorScheme !== 'dark' && "text-white"}`}> Web Development </h3>
+              <p className={`leading-8 ${colorScheme == 'dark' ? "text-gray-lite" : "text-[#A6A6A6]"}`}> Lorem ipsum dolor sit
+                amet, consectetuer adipiscing elit, sed diam euismod volutpat. </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="px-2 sm:px-5 md:px-10 lg:px-14">
+        <div className={`max-w-full px-10 h-auto py-16 rounded-xl ${colorScheme == 'dark' ? "bg-[#F8FBFB]" : "bg-[#0D0D0D]"}`} >
+          <h3 className={`text-center text-6xl mb-10 font-semibold ${colorScheme !== 'dark' && "text-white"} `}> Ce que mes clients disent ! </h3>
+          <Swiper
+            className="mySwiper mt-5"
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            slidesPerView={"auto"}
+            pagination={{ clickable: true, }}
+            // centeredSlides={true}
+            loop={true}
+            spaceBetween={30}
+            modules={[Pagination, Autoplay]}
+          >
+            {Array(9).fill(0).map((el: any, i: number) => (
+              <SwiperSlide key={i}>
+                <div className={`h-[90%] flex items-center p-4 gap-x-4 rounded-xl border  ${colorScheme == 'dark' ? "bg-gray-100/60 border-gray-400" : "bg-purple-100/10 border-gray-500"} `} >
+                  <img className='w-40' src={`https://ui-avatars.com/api/?name=${userName.split(" ")[0]}+${userName.split(" ")[1]}&background=1A3059&color=ffffff&rounded=true&bold=true`} alt="" />
+                  <div>
+                    <p className={`font-medium italic text-base ${colorScheme == 'dark' ? "text-gray-700" : "text-gray-300 "} `} >&ldquo;Hiring a Senior Laravel engineer through JobBoard has been incredible. The best job board experience we&apos;ve ever had.&ldquo;</p>
+                    <span className={`text-sm  ${colorScheme == 'dark' ? "text-gray-600" : "text-gray-400 "}`} >{userName}</span>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   )
 }
