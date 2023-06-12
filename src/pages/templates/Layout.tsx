@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react'
 
-import { createClient } from 'contentful';
+
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 
@@ -53,18 +53,16 @@ export default function RootLayout({ children }: {
 
   return (
     <ColorSchemeContext.Provider value={{ colorScheme, updateColorScheme }}>
-
-
-
       <div className="bg-homeBg dark:bg-homeBg-dark min-h-screen bg-no-repeat bg-center bg-cover bg-fixed md:pb-16 w-full">
-
+        
         <div className="container">
           <Navbar />
         </div>
 
-
         <div className="container grid grid-cols-12 md:gap-10 justify-between lg:mt-[220px]">
+          
           <Sidebar />
+          
           <div className="col-span-12 lg:col-span-8">
             <div>
               <div className={`lg:rounded-2xl py-5 ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
@@ -72,7 +70,9 @@ export default function RootLayout({ children }: {
               </div>
             </div>
           </div>
+
         </div>
+
       </div>
     </ColorSchemeContext.Provider>
 

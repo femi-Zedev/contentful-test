@@ -14,11 +14,6 @@ export default function Home( ) {
   const { colorScheme } = useContext(ColorSchemeContext)
   const userName = 'Jean Baors'
   
-  useEffect(() => {
-    getSidebarContent()
-      .then((res) => console.log(res.items))
-      .catch((error) => console.error(error));
-  }, []);
 
   return (
     <>
@@ -42,7 +37,7 @@ export default function Home( ) {
 
       </div>
 
-      <div className="pb-12 px-2 sm:px-5 md:px-10 lg:px-14">
+      {/* <div className="pb-12 px-2 sm:px-5 md:px-10 lg:px-14">
         <h3 className="text-[35px] dark:text-white font-bold font-robotoSlab pb-5"> What I do! </h3>
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-2">
           <div className={`about-box ${colorScheme == 'dark' ? "bg-[#fcf4ff]" : "bg-transparent"}`} >
@@ -105,11 +100,12 @@ export default function Home( ) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="px-2 sm:px-5 md:px-10 lg:px-14">
-        <div className={`max-w-full px-10 h-auto py-16 rounded-xl ${colorScheme == 'dark' ? "bg-[#F8FBFB]" : "bg-[#0D0D0D]"}`} >
-          <h3 className={`text-center text-6xl mb-10 font-semibold ${colorScheme !== 'dark' && "text-white"} `}> Ce que mes clients disent ! </h3>
+        <div className={`max-w-full px-10 h-auto pb-16 rounded-xl ${colorScheme == 'dark' ? "bg-[#F8FBFB]" : "bg-[#0D0D0D]"}`} >
+          <h2 className={`text-6xl py-8 font-semibold ${colorScheme == 'light' && "text-[#F8FBFB]"}`}>Ce que disent mes clients  !</h2>
+          {/* <h3 className={`text-center text-6xl mb-10 font-semibold ${colorScheme !== 'dark' && "text-white"} `}> Ce que mes clients disent ! </h3> */}
           <Swiper
             className="mySwiper mt-5"
             autoplay={{ delay: 3500, disableOnInteraction: false }}

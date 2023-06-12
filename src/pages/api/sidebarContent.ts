@@ -1,8 +1,11 @@
-import { contentfulClient } from "./contentfulClient"
+import contentfulClient from "./contentfulClient"
 
 
-export const getSidebarContent = async() => {
-  const sidebar = await contentfulClient.getEntries({ content_type: 'sidebar'})
-  console.log(sidebar)
-  return sidebar
+
+export async function getSidebarContent( ) {
+	const contentful = contentfulClient()
+
+	const sidebarContent = await contentful.getEntries({ content_type: 'sidebar'})
+
+	return sidebarContent.items
 }

@@ -1,14 +1,16 @@
 import { ColorSchemeContext } from '@/pages/templates/Layout'
+import Link from 'next/link'
+import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react'
 
 export default function Navbar() {
+  const router = useRouter();
   const { colorScheme, updateColorScheme } = useContext(ColorSchemeContext)
   const [menuOpen, switchMenu] = useState<boolean>(false)
 
   return (
     <header className="flex justify-between items-center fixed top-0 left-0 w-full lg:static z-[1111111111]">
-      <div
-        className={`flex justify-between w-full px-4 lg:px-0 ${colorScheme == 'dark' ? "bg-[#F3F6F6]" : "bg-black "} lg:bg-transparent lg:dark:bg-transparent `} >
+      <div className={`flex justify-between w-full px-4 lg:px-0 ${colorScheme == 'dark' ? "bg-[#F3F6F6]" : "bg-black "} lg:bg-transparent lg:dark:bg-transparent `} >
         <div className="flex justify-between w-full items-center space-x-4 lg:my-8 my-5">
           {/* website logo */}
           <a className="text-5xl font-semibold" href="index.html">
@@ -18,7 +20,7 @@ export default function Navbar() {
             {/* light and dark mode button */}
             <button id="theme-toggle-mobile" type="button" className="dark-light-btn lg:hidden w-[44px] h-[44px] ml-2" onClick={updateColorScheme}>
               {colorScheme == 'dark' && <i id="theme-toggle-light-icon-mobile" className="fa-solid fa-sun text-xl hidden"></i>}
-              {colorScheme == 'light' && <i id="theme-toggle-dark-icon-mobile" className="fa-solid text-xl fa-moon hidden"></i>}
+              {colorScheme == 'light' && <i id="theme-toggle-dark-icon-mobile" className="fa-solid fa-moon text-xl  hidden"></i>}
             </button>
 
             {/* mobile toggle button */}
@@ -34,22 +36,28 @@ export default function Navbar() {
       <nav className="hidden lg:block">
         <ul className="flex my-12">
           <li>
-            <a className="menu-item-two-active" href="aboutTwo.html">
+            <Link href="/" className={`${router.asPath === "/" ? "menu-item-two-active" : "menu-item-two" }`}  >
               <span className="mr-2 text-base">
                 <i className="fa-regular fa-user"></i>
-              </span> About </a>
+              </span>
+              Bio
+            </Link>
           </li>
           <li>
-            <a className="menu-item-two" href="portfiloTwo.html">
+            <Link href="portfolio" className={`${router.asPath === "/portfolio" ? "menu-item-two-active" : "menu-item-two" }`}>
               <span className="mr-2 text-base">
                 <i className="fas fa-briefcase"></i>
-              </span> Works </a>
+              </span>
+              Portfolio
+            </Link>
           </li>
           <li>
-            <a className="menu-item-two" href="contactTwo.html">
+            <Link href="blog" className={`${router.asPath === "/blog" ? "menu-item-two-active" : "menu-item-two" }`}  >
               <span className="mr-2 text-base">
-                <i className="fa-solid fa-address-book"></i>
-              </span> Contact </a>
+                <i className="fa-brands fa-blogger"></i>
+              </span> 
+              Blogs
+            </Link>
           </li>
           <li>
             {/* light and dark mode button */}
