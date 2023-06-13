@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext, useState } from 'react'
 import { ColorSchemeContext } from './templates/Layout'
-import IsoTopeGrid, { GridLayout } from "react-isotope";
+import MasonryLayout from '@/components/MasonryLayout';
 
 export interface PortfolioItemType {
     title: string;
@@ -12,19 +12,7 @@ export interface PortfolioItemType {
     tech: string[];
     modalContent: ReactNode;
 }
-
-export default function Portfolio() {
-    const filtersDefault = [
-        { label: "All", value: "*" },
-        { label: "UI/UX", value: "ui-ux"},
-        { label: "Fanart", value: "fanart" },
-        { label: "Dev", value: "dev" },
-    ];
-    const { colorScheme } = useContext(ColorSchemeContext)
-    const [selectedFilter, updateFilters] = useState("*");
-
-
-    const works = [
+  const works = [
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/1.jpg",
@@ -45,7 +33,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/2.jpg",
-            category: "dev",
+            category: "Dev",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -96,7 +84,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/5.jpg",
-            category: "dev",
+            category: "Dev",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -113,7 +101,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/6.jpg",
-            category: "fanart",
+            category: "Fanart",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -130,7 +118,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/7.jpg",
-            category: "fanart",
+            category: "Fanart",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -147,7 +135,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/8.jpg",
-            category: "dev",
+            category: "Dev",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -164,7 +152,7 @@ export default function Portfolio() {
         {
             title: "Churl urina",
             imgSrc: "/assets/images/work_images/small/9.jpg",
-            category: "fanart",
+            category: "Fanart",
             projectType: "website",
             client: "Envato",
             projectLink: "https://teska-travel.netlify.app/",
@@ -181,12 +169,33 @@ export default function Portfolio() {
 
     ]
 
-    const isotopArray: Array<GridLayout> = works.map((item, i) => { return { id: 'id' + i, filter: [item.category], row: 1, col: 2, h: 1, w: 1 } })
+export default function Portfolio() {
+    const filtersDefault = [
+        { label: "All" },
+        { label: "UI/UX" },
+        { label: "Fanart" },
+        { label: "Dev" },
+    ];
+    const { colorScheme } = useContext(ColorSchemeContext)
+    const [selectedFilter, updateFilters] = useState("All");
+    const [portfolios, setPortfolios] = useState(works)
+    const [isAnimating, setAnimating] = useState(false);
 
-    const onFilter = (value: string, ) => {
-        updateFilters(value);
-    };
+  
 
+    const onFilter = (value: string) => {
+        if (selectedFilter !== value) {
+          setAnimating(true); // Start animation
+          setTimeout(() => {
+            updateFilters(value);
+            let filteredWorks = works.filter((work) => work.category == value);
+            filteredWorks.length > 0
+              ? setPortfolios(filteredWorks)
+              : setPortfolios(works);
+            setAnimating(false); // End animation
+          }, 500); // Wait for the animation duration
+        }
+      };
     return (
         <div className="container  mb-8 px-4 sm:px-5 md:px-10 lg:px-[60px]">
             <div className="py-12 ">
@@ -201,31 +210,26 @@ export default function Portfolio() {
             </div>
             {/* End py-12 */}
 
-            <div id="isotop-gallery-wrapper" className="mymix portfolio_list-two  two-col">
+            <div  className="">
                 <div className="grid-sizer"></div>
-                <IsoTopeGrid
-                    gridLayout={isotopArray}
-                    noOfCols={2}
-                    unitWidth={200}
-                    unitHeight={100}
-                    filters={filtersDefault}>
+                <MasonryLayout columns={2} gap={24}>
                     {
-                        works.map((item: PortfolioItemType, i) => (
-                            <PortfolioItem key={i} colorScheme={colorScheme} item={item} />
+                        portfolios.map((item: PortfolioItemType, i) => (
+                            <PortfolioItem key={i} colorScheme={colorScheme} item={item} animate={isAnimating} />
                         ))
                     }
-                </IsoTopeGrid>
+                </MasonryLayout>
 
             </div>
         </div>
     )
 }
 
-export function PortfolioItem({ colorScheme, item }: { colorScheme: string, item: PortfolioItemType }) {
+export function PortfolioItem({ colorScheme, item, animate  }: { colorScheme: string, item: PortfolioItemType, animate: boolean }) {
     const { title, imgSrc, category, projectType, client, projectLink, tech, modalContent } = item
     return (
         <>
-            <div className="portfolio_list-two-items isotop-item plugin custom ">
+            <div className={`portfolio_list-two-items isotop-item plugin custom w-full ${animate ? "fade-scale" : ""}`} >
                 <div className={`rounded-lg p-6 ${colorScheme == 'dark' ? "bg-[#fff0f0]" : "bg-transparent border-[2px]"} border-[#212425]`} >
                     <div className="overflow-hidden rounded-lg">
                         <a href="portfiloOne.html#portfiloOne" rel="modal:open">

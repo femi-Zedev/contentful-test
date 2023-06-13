@@ -126,6 +126,44 @@ input:-webkit-autofill:focus {
 	width: 50%;
 	padding: 0 10px;
 }
+
+@keyframes fade-scale-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-scale {
+  animation-name: fade-scale-animation;
+  animation-duration: 750ms;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+/* 
+.fade-scale {
+  animation: fade-scale-animation;
+}
+
+@keyframes fade-scale-animation {
+  0% {
+    transition: none 0s ease 0s;
+    opacity: 0;
+    display:inline-block;
+    transform: scale(0.01);
+  }
+
+  100% {
+    transition: all 600ms ease 0ms, opacity 600ms linear;
+    display:inline-block;
+    transform: translate(-283px, 0px)
+  }
+} */
+
 @media (max-width: 1199px) {
 	.three-col .isotop-item,
 	.three-col .grid-sizer {
