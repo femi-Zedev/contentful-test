@@ -97,7 +97,7 @@ export default function Portfolio() {
                 {/* fillter group buttons */}
                 <ul className="button-group isotop-menu-wrapper mt-[30px] flex w-full justify-start md:justify-end flex-wrap font-medium">
                     {cats.map(cat => (
-                        <li className={`capitalize fillter-btn mr-4 md:mx-4 ${selectedFilter == cat && "is-checked"}`} onClick={() => onFilter(cat)}>{cat}</li>
+                        <li key={cat} className={`capitalize fillter-btn mr-4 md:mx-4 ${selectedFilter == cat && "is-checked"}`} onClick={() => onFilter(cat)}>{cat}</li>
                     ))}
                 </ul>
             </div>
@@ -115,7 +115,7 @@ export default function Portfolio() {
                         :
                         <div className='flex flex-col p-10 gap-y-5 items-center w-full h-96 bg-slate-400/10 rounded-lg'>
                             <Lottie options={lottieOptions} width={250} height={250}  />
-                            <h2 className='font-semibold text-lg text-gray-500'>Oups il n'y a pas d'illustration pour cette catégorie !!</h2>
+                            <h2 className='font-semibold text-lg text-gray-500'>Oups il n&lsquo;y a pas d&lsquo;illustration pour cette catégorie !!</h2>
                         </div>
                 }
 

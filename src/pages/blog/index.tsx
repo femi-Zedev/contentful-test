@@ -14,7 +14,7 @@ export interface BlogPostType {
   updated_at: any;
 }
 
-export default function blog() {
+export default function Blog() {
   const { colorScheme } = useContext(ColorSchemeContext)
 
 
