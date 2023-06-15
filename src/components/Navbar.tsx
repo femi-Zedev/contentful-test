@@ -36,7 +36,7 @@ export default function Navbar() {
       <nav className="hidden lg:block">
         <ul className="flex my-12">
           <li>
-            <Link href="/" className={`${router.asPath === "/" ? "menu-item-two-active" : "menu-item-two" }`}  >
+            <Link href="/" className={`${router.asPath === "/" ? "menu-item-two-active" : "menu-item-two"}`}  >
               <span className="mr-2 text-base">
                 <i className="fa-regular fa-user"></i>
               </span>
@@ -44,7 +44,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="portfolio" className={`${router.asPath === "/portfolio" ? "menu-item-two-active" : "menu-item-two" }`}>
+            <Link href="/portfolio" className={`${router.asPath === "/portfolio" ? "menu-item-two-active" : "menu-item-two"}`}>
               <span className="mr-2 text-base">
                 <i className="fas fa-briefcase"></i>
               </span>
@@ -52,10 +52,10 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="blog" className={`${router.asPath === "/blog" ? "menu-item-two-active" : "menu-item-two" }`}  >
+            <Link href="/blog" className={`${router.asPath.includes('blog') ? "menu-item-two-active" : "menu-item-two"}`}  >
               <span className="mr-2 text-base">
                 <i className="fa-brands fa-blogger"></i>
-              </span> 
+              </span>
               Blogs
             </Link>
           </li>
@@ -73,24 +73,28 @@ export default function Navbar() {
       {menuOpen == true &&
         <nav >
           <ul className={`block p-3 rounded-b-[20px] shadow-md absolute left-0 top-20 z-[22222222222222] w-full ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
-            <li>
-              <a className="mobile-menu-items-active" href="aboutTwo.html">
+            <li >
+              <Link href="/" className={`${router.asPath === "/" ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fa-regular fa-user"></i>
-                </span> About </a>
+                </span> 
+                About
+              </Link>
             </li>
 
             <li>
-              <a className="mobile-menu-items" href="portfiloTwo.html">
+              <Link  href="/portfolio" className={`${router.asPath === "portfolio" ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fas fa-briefcase"></i>
-                </span> Works </a>
+                </span>
+                Works
+              </Link>
             </li>
             <li>
-              <a className="mobile-menu-items" href="contactTwo.html">
+              <Link href="/blog" className={`${router.asPath.includes('blog') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fa-solid fa-address-book"></i>
-                </span> Contact </a>
+                </span> Contact </Link>
             </li>
           </ul>
         </nav>}

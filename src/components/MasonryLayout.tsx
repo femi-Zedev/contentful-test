@@ -13,7 +13,7 @@ export default function MasonryLayout(props:any) {
   for (let i = 0; i < props.children.length; i++) {
     const columnIndex = i % props.columns;
     columnWrapper[`column${columnIndex}`].push(
-      <div style={{ marginBottom: `${props.gap}px`}}>
+      <div key={i} style={{ marginBottom: `${props.gap}px`}}>
         {props.children[i]}
       </div>
     );
@@ -22,18 +22,14 @@ export default function MasonryLayout(props:any) {
   // wrap children in each column with a div
   for (let i = 0; i < props.columns; i++) {
     result.push(
-      <div
-        style={{
-          marginLeft: `${i > 0 ? props.gap : 0}px`,
-          flex: 1,
-        }}>
+      <div key={i} style={{  marginLeft: `${i > 0 ? props.gap : 0}px`,  flex: 1 }}>
         {columnWrapper[`column${i}`]}
       </div>
     );
   }
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={props.className} style={{ display: 'flex' }}>
       {result}
     </div>
   );
