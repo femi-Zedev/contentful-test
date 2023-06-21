@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
-import { ColorSchemeContext } from '../templates/Layout';
+import { ColorSchemeContext, sidebarState } from '../templates/Layout';
 import Link from 'next/link';
 import { BlogPostType } from '.';
 import dayjs from 'dayjs';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { fetchBlogPost } from '../api/blogPosts';
+import { useRecoilState } from 'recoil';
 
 export const isObjectEmpty = (obj: object) => {
   let isEmpty = true;
@@ -24,6 +25,7 @@ export default function PostContent() {
     updated_at: null,
   });
   const { slug } = router.query;
+  const [sidebarContent, setSidebarContent] = useRecoilState<any>(sidebarState);
 
 
   // useEffect(() => {
@@ -39,12 +41,12 @@ export default function PostContent() {
   // }, [])
 
   useEffect(() => {
-   
-    fetchBlogPost(slug as string ).then(res => {      
+
+    fetchBlogPost(slug as string).then(res => {
       console.log(res);
       setPost(res as BlogPostType)
     })
-    
+
   }, [])
 
 
@@ -59,10 +61,10 @@ export default function PostContent() {
       <div className="pb-2">
         {!isObjectEmpty(post) &&
           <>
-          {
-            post.post_img && 
-            <img className="w-full md:h-[450px] object-cover rounded-xl mt-6" src={post.post_img} alt="blog image" />
-          }
+            {
+              post.post_img &&
+              <img className="w-full md:h-[450px] object-cover rounded-xl mt-6" src={post.post_img} alt="blog image" />
+            }
             <h2 className={`${colorScheme == 'light' && "text-white"} sm:text-3xl mt-8 font-semibold`}>
               {post.title}
             </h2>
@@ -77,24 +79,22 @@ export default function PostContent() {
             <div className="lg:flex items-center md:justify-end gap-x-4 mt-8 mr-3">
               <h6 className={`${colorScheme == 'light' && "text-white"} my-2 text-[20px] font-medium`}>Mes réseaux</h6>
               <div className="flex space-x-3">
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-                  <span className="socialbtn text-[#1773EA]">
-                    <i className="fa-brands fa-facebook-f"></i>
-                  </span>
-                </a>
-                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
-                  <span className="socialbtn text-[#1C9CEA]">
-                    <i className="fa-brands fa-twitter"></i>
-                  </span>
-                </a>
-                <a href="https://dribbble.com/" target="_blank" rel="noopener noreferrer">
+                <a href={sidebarContent!['instagramLink']} target="_blank" rel="noopener noreferrer">
                   <span className="socialbtn text-[#e14a84]">
-                    <i className="fa-brands fa-dribbble"></i>
+                    <i className="fa-brands fa-instagram"></i>
                   </span>
                 </a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">
+                <a href={sidebarContent!['linkedinLink']} target="_blank"
+                  rel="noopener noreferrer">
                   <span className="socialbtn text-[#0072b1]">
                     <i className="fa-brands fa-linkedin-in"></i>
+                  </span>
+                </a>
+
+                <a href={sidebarContent!['whatsappLink']} target="_blank"
+                  rel="noopener noreferrer">
+                  <span className="socialbtn text-green-600">
+                    <i className="fa-brands fa-whatsapp"></i>
                   </span>
                 </a>
               </div>

@@ -3,6 +3,7 @@ import { useState, useEffect, createContext } from 'react'
 
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
+import { RecoilRoot, atom } from 'recoil';
 
 export const metadata = {
   title: 'Ayemane Badarou',
@@ -19,6 +20,11 @@ export const ColorSchemeContext = createContext<colorSchemeContextType>({
   updateColorScheme: () => { }
 });
 
+
+export const sidebarState = atom({
+  key: 'sidebarContent',
+  default: {}
+})
 
 
 
@@ -53,27 +59,30 @@ export default function RootLayout({ children }: {
 
   return (
     <ColorSchemeContext.Provider value={{ colorScheme, updateColorScheme }}>
-      <div className="bg-homeBg dark:bg-homeBg-dark min-h-screen bg-no-repeat bg-center bg-cover bg-fixed md:pb-16 w-full">
-        
-        <div className="container">
-          <Navbar />
-        </div>
+      <RecoilRoot>
+        <div className="bg-homeBg dark:bg-homeBg-dark min-h-screen bg-no-repeat bg-center bg-cover bg-fixed md:pb-16 w-full">
 
-        <div className="container grid grid-cols-12 md:gap-10 justify-between lg:mt-[220px]">
-          
-          <Sidebar />
-          
-          <div className="col-span-12 lg:col-span-8">
-            <div>
-              <div className={`lg:rounded-2xl py-5 ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
-                {children}
+          <div className="container">
+            <Navbar />
+          </div>
+
+          <div className="container grid grid-cols-12 md:gap-10 justify-between lg:mt-[220px]">
+
+            <Sidebar />
+
+            <div className="mt-28 col-span-12 lg:col-span-8">
+              <div>
+                <div className={`rounded-2xl py-5 ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
+                  {children}
+                </div>
               </div>
             </div>
+
           </div>
 
         </div>
+      </RecoilRoot>
 
-      </div>
     </ColorSchemeContext.Provider>
 
   )

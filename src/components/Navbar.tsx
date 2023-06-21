@@ -1,21 +1,30 @@
+import { getNavbarContent } from '@/pages/api/navbarContent';
 import { ColorSchemeContext } from '@/pages/templates/Layout'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 export default function Navbar() {
   const router = useRouter();
   const { colorScheme, updateColorScheme } = useContext(ColorSchemeContext)
   const [menuOpen, switchMenu] = useState<boolean>(false)
+  const [navbarContent, setNavbarContent] = useState<any>({});
+
+
+  useEffect(() => {
+    getNavbarContent()
+      .then((res) => setNavbarContent(res[0].fields))
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <header className="flex justify-between items-center fixed top-0 left-0 w-full lg:static z-[1111111111]">
       <div className={`flex justify-between w-full px-4 lg:px-0 ${colorScheme == 'dark' ? "bg-[#F3F6F6]" : "bg-black "} lg:bg-transparent lg:dark:bg-transparent `} >
         <div className="flex justify-between w-full items-center space-x-4 lg:my-8 my-5">
           {/* website logo */}
-          <a className="text-5xl font-semibold" href="index.html">
-            <img className="h-[26px] lg:h-[32px]" src="/assets/images/logo/logo.png" alt="logo" />
-          </a>
+          <Link href="/" className="text-5xl font-semibold" >
+            <img className="h-[26px] lg:h-[32px]" src={'https:' + navbarContent.appLogo?.fields.file.url} alt="logo" />
+          </Link>
           <div className="flex items-center">
             {/* light and dark mode button */}
             <button id="theme-toggle-mobile" type="button" className="dark-light-btn lg:hidden w-[44px] h-[44px] ml-2" onClick={updateColorScheme}>
@@ -78,22 +87,22 @@ export default function Navbar() {
                 <span className="mr-2 text-xl">
                   <i className="fa-regular fa-user"></i>
                 </span> 
-                About
+                Bio
               </Link>
             </li>
 
             <li>
-              <Link  href="/portfolio" className={`${router.asPath === "portfolio" ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
+              <Link  href="/portfolio" className={`${router.asPath.includes('portfolio') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fas fa-briefcase"></i>
                 </span>
-                Works
+                Portfolio
               </Link>
             </li>
             <li>
               <Link href="/blog" className={`${router.asPath.includes('blog') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
-                  <i className="fa-solid fa-address-book"></i>
+                  <i className="fa-brands fa-blogger"></i>
                 </span> Contact </Link>
             </li>
           </ul>
