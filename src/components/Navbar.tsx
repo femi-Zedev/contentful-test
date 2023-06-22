@@ -21,6 +21,7 @@ export default function Navbar() {
     <header className="flex justify-between items-center fixed top-0 left-0 w-full lg:static z-[1111111111]">
       <div className={`flex justify-between w-full px-4 lg:px-0 ${colorScheme == 'dark' ? "bg-[#F3F6F6]" : "bg-black "} lg:bg-transparent lg:dark:bg-transparent `} >
         <div className="flex justify-between w-full items-center space-x-4 lg:my-8 my-5">
+          
           {/* website logo */}
           <Link href="/" className="text-5xl font-semibold" >
             <img className="h-[26px] lg:h-[32px]" src={'https:' + navbarContent.appLogo?.fields.file.url} alt="logo" />
@@ -28,16 +29,17 @@ export default function Navbar() {
           <div className="flex items-center">
             {/* light and dark mode button */}
             <button id="theme-toggle-mobile" type="button" className="dark-light-btn lg:hidden w-[44px] h-[44px] ml-2" onClick={updateColorScheme}>
-              {colorScheme == 'dark' && <i id="theme-toggle-light-icon-mobile" className="fa-solid fa-sun text-xl hidden"></i>}
-              {colorScheme == 'light' && <i id="theme-toggle-dark-icon-mobile" className="fa-solid fa-moon text-xl  hidden"></i>}
+              {colorScheme == 'light' && <i id="theme-toggle-light-icon-mobile" className="fa-solid fa-sun text-xl lg:hidden"></i>}
+              {colorScheme == 'dark' && <i id="theme-toggle-dark-icon-mobile" className="fa-solid fa-moon text-xl lg:hidden"></i>}
             </button>
 
             {/* mobile toggle button */}
             <button id="menu-toggle" type="button" className="menu-toggle-btn" onClick={() => switchMenu(!menuOpen)}>
-              {menuOpen && <i id="menu-toggle-open-icon" className="fa-solid fa-bars text-xl "></i>}
-              {!menuOpen && <i id="menu-toggle-close-icon" className="fa-solid fa-xmark text-xl hidden  "></i>}
+              {!menuOpen && <i id="menu-toggle-open-icon" className="fa-solid fa-bars text-xl"></i>}
+              {menuOpen  && <i id="menu-toggle-close-icon" className="fa-solid fa-xmark text-xl"></i>}
             </button>
           </div>
+
         </div>
       </div>
 
@@ -71,8 +73,8 @@ export default function Navbar() {
           <li>
             {/* light and dark mode button */}
             <button id="theme-toggle" type="button" className="dark-light-btn w-[44px] h-[44px] ml-2" onClick={updateColorScheme}>
-              {colorScheme == 'dark' && <i id="theme-toggle-light-icon" className="fa-solid fa-sun text-xl hidden"></i>}
-              {colorScheme == 'light' && <i id="theme-toggle-dark-icon" className="fa-solid text-xl fa-moon hidden"></i>}
+              {colorScheme == 'light' && <i id="theme-toggle-light-icon" className="hidden lg:block fa-solid fa-sun text-xl"></i>}
+              {colorScheme == 'dark' && <i id="theme-toggle-dark-icon" className="hidden lg:block fa-solid fa-moon text-xl"></i>}
             </button>
 
           </li>

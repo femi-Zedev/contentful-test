@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// source : https://dev.to/chilupa/usebreakpoint-react-hook-13oa
 
 const breakpoints = {
   0: 'xs',
@@ -42,6 +43,7 @@ const useBreakpoint = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, [windowSize.width]);
+
   return breakpoint;
 };
 

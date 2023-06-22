@@ -3,9 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --swiper-slide-width: 75% !important;
-}
 
 html, body {
 	font-family: "Poppins", sans-serif;
@@ -19,15 +16,6 @@ html, body {
   @apply text-2xl font-semibold my-2;
 }
 
-/* missing font awesome */
-.fa-moon:before {
-  content: "\f186";
-}
-
-.fa-sun:before {
-  content: "\f185";
-}
-
 
 /* modal */
 .modal {
@@ -36,7 +24,6 @@ html, body {
 
 /* swiper slide */
 .swiper-slide {
-  width: var(--swiper-slide-width);
   height: initial !important;
 }
 

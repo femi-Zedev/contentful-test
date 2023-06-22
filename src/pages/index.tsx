@@ -7,11 +7,13 @@ import { ColorSchemeContext } from "./templates/Layout";
 import SidebarMobile from "@/components/SidebarMobile";
 import { getAboutContent } from "./api/aboutContent";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import useBreakpoint from "@/hooks/useBreakpoint";
 
 
 export default function Home( ) {
   const { colorScheme } = useContext(ColorSchemeContext)
   const [aboutContent, setAboutContent] = useState<any>({});
+  const viewPortWidth = useBreakpoint();
   
   useEffect(() => {
     getAboutContent()
@@ -53,7 +55,7 @@ export default function Home( ) {
             modules={[Pagination, Autoplay]}
           >
             {aboutContent['customerReviews']?.map((item: any, i: number) => (
-              <SwiperSlide key={i} className="h-full">
+              <SwiperSlide key={i} className={`h-full ${viewPortWidth == 'sm' || viewPortWidth == 'xs' ? 'w-full': '!w-3/4'} `} >
                 <div className={`h-[90%] flex items-center p-6 gap-x-4 rounded-xl border  ${colorScheme == 'dark' ? "bg-gray-100/60 border-gray-400" : "bg-purple-100/10 border-gray-500"} `} >
                   <img className='w-16 max-w-[64px] ' src={`https://ui-avatars.com/api/?name=${item.fields.customerName.split(" ")[0]}+${item.fields.customerName.split(" ")[1]}&background=1A3059&color=ffffff&rounded=true&bold=true`} alt="" />
                   <div>
