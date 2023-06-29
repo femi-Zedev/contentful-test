@@ -72,7 +72,7 @@ export default function RootLayout({ children }: {
 
             <div className="mt-28 col-span-12 lg:col-span-8">
               <div>
-                <div className={`rounded-2xl py-5 ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
+                <div className={`rounded-2xl py-5 mx-2 md:mx-0 ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
                   {children}
                 </div>
               </div>

@@ -105,7 +105,7 @@ export default function Navbar() {
               <Link href="/blog" className={`${router.asPath.includes('blog') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fa-brands fa-blogger"></i>
-                </span> Contact </Link>
+                </span> Blog </Link>
             </li>
           </ul>
         </nav>}

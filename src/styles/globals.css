@@ -16,11 +16,50 @@ html, body {
   @apply text-2xl font-semibold my-2;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+  overflow-x: hidden;
+  margin-left: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #c4c6c8;
+  border-radius: 14px;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+}
+
 
 /* modal */
 .modal {
 	max-width: 800px !important;
 }
+
+.mantine-Paper-root {
+  overflow: hidden;
+}
+
+.mantine-Modal-close {
+  margin-lift: 0.5rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 100px;
+  background-color: #0e0d0d30;
+}
+
+.mantine-Modal-close:hover {
+  color: white;
+  background: #ef4060;
+}
+
+.mantine-Modal-title {
+  width: 98%;
+} 
+
+
 
 /* swiper slide */
 .swiper-slide {
@@ -623,7 +662,6 @@ button,
 [type='submit'] {
   -webkit-appearance: button;
   /* 1 */
-  background-color: transparent;
   /* 2 */
   background-image: none;
   /* 2 */

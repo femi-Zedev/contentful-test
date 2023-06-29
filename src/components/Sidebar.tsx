@@ -56,7 +56,7 @@ export default function Sidebar() {
                 </span>
                 <div className="text-left ml-2.5">
                   <p className={`text-xs  ${colorScheme == 'dark' ? "text-[#44566C]" : "text-[#A6A6A6]"}`}> N° de Téléphone </p>
-                  <p className={`${colorScheme == 'light' && "text-white"}`}>{sidebarContent!['phoneNumber']}</p>
+                  <a href={`tel:+229${sidebarContent!['phoneNumber']}` } className={`hover:text-[#E93B81] ${colorScheme == 'light' && "text-white"}`}>+229 {sidebarContent!['phoneNumber']}</a>
                 </div>
               </div>
               <div className={`flex border-b py-2.5 ${colorScheme == 'dark' ? "border-[#E3E3E3]" : "border-[#3D3A3A]"}`}>
@@ -65,7 +65,7 @@ export default function Sidebar() {
                 </span>
                 <div className="text-left ml-2.5">
                   <p className={`text-xs  ${colorScheme == 'dark' ? "text-[#44566C]" : "text-[#A6A6A6]"}`}> Email </p>
-                  <p className={`${colorScheme == 'light' && "text-white"}`}>{sidebarContent!['email']}</p>
+                  <a href={sidebarContent!['email']} className={`hover:text-[#E93B81] ${colorScheme == 'light' && "text-white"}`}>{sidebarContent!['email']}</a>
                 </div>
               </div>
               <div className={`flex py-2.5`}>

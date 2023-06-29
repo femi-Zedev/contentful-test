@@ -51,12 +51,10 @@ export default function PostContent() {
 
 
 
-  // setup redux to store blog articles
-
   return (
-    <div className="px-6">
-      <Link className='' href="/blog">
-        <h4 className="pt-3 pb-6 font-semibold text-6xl pr-3 lg:mt-0">&#8592; Tout mes articles</h4>
+    <div className="py-12 px-4 sm:px-5 md:px-10 lg:px-[60px]">
+      <Link className={`${colorScheme == 'light' && "text-white"}`} href="/blog">
+        <h4 className="pt-3 pb-6 font-semibold text-6xl pr-3 lg:mt-0 hover:text-[#FA5252]">&#8592; Tout mes articles</h4>
       </Link>
       <div className="pb-2">
         {!isObjectEmpty(post) &&
