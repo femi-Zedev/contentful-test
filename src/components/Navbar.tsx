@@ -17,6 +17,11 @@ export default function Navbar() {
       .catch((error) => console.error(error));
   }, []);
 
+  function navigateMobile(path: string){
+    switchMenu(false)
+    router.push(path)
+  }
+
   return (
     <header className="flex justify-between items-center fixed top-0 left-0 w-full lg:static z-[1111111111]">
       <div className={`flex justify-between w-full px-4 lg:px-0 ${colorScheme == 'dark' ? "bg-[#F3F6F6]" : "bg-black "} lg:bg-transparent lg:dark:bg-transparent `} >
@@ -85,27 +90,28 @@ export default function Navbar() {
         <nav >
           <ul className={`block p-3 rounded-b-[20px] shadow-md absolute left-0 top-20 z-[22222222222222] w-full ${colorScheme == 'dark' ? "bg-white" : "bg-[#111111]"}`} >
             <li >
-              <Link href="/" className={`${router.asPath === "/" ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
+              <a onClick={() => navigateMobile("/") } className={`${router.asPath === "/" ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fa-regular fa-user"></i>
                 </span> 
                 Bio
-              </Link>
+              </a>
             </li>
 
             <li>
-              <Link  href="/portfolio" className={`${router.asPath.includes('portfolio') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
+              <a onClick={() => navigateMobile("/portfolio") } className={`${router.asPath.includes('portfolio') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fas fa-briefcase"></i>
                 </span>
                 Portfolio
-              </Link>
+              </a>
             </li>
             <li>
-              <Link href="/blog" className={`${router.asPath.includes('blog') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
+              <a onClick={() => navigateMobile("/blog") } className={`${router.asPath.includes('blog') ? "mobile-menu-items-active" : "mobile-menu-items"}`} >
                 <span className="mr-2 text-xl">
                   <i className="fa-brands fa-blogger"></i>
-                </span> Blog </Link>
+                </span> Blog 
+              </a>
             </li>
           </ul>
         </nav>}

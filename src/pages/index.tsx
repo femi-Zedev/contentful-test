@@ -26,7 +26,7 @@ export default function Home( ) {
 
   return (
     <>
-      <div className="pt-12 md:py-12 px-2 sm:px-5 md:px-10 lg:px-14">
+      <div className="pt-12 md:py-12 mx-2 md:mx-0 px-2 sm:px-5 md:px-10 lg:px-14">
         <h2 className="after-effect after:left-52">{aboutContent!['title']}</h2>
         <SidebarMobile/>
         <div className="lg:grid grid-cols-12 md:gap-10 pt-4 md:pt-[30px] items-center hidden">
